@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, TextInput, TouchableOpacity,Image} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
+import Input from '../../components/TextInput/';
 
 export default function LoginScreen({navigation}){
 
@@ -10,7 +11,6 @@ export default function LoginScreen({navigation}){
 
     const authLogin = () => {
         if (email === 'teste@logus.com' && password === 'Teste'){
-            navigation.navigate('Home');
             alert('Login efetuado com sucesso');
         } else {
             alert('Email ou senha invalidos');
@@ -21,37 +21,38 @@ export default function LoginScreen({navigation}){
     <View style={styles.container}>
         <Image
         style={styles.logo}
-        source={require('../../assets/logoLogin.png')}
+        source={require('../../assets/images/logo.png')}
         />
         <Image
-        source={require('../../assets/imageLogin.png')}
+        source={require('../../assets/images/imageLogin.png')}
         style={styles.imageLogin}
         />
         <Text style={styles.title}>Acessar minha conta</Text>
         <View style={styles.inputContainer}>
             <Ionicons name="mail-outline" size={20} color="#A7A7A7" style={styles.icon} />
-            <TextInput
-            keyboardType='email-address'
-            onChange={setEmail}
-            placeholder='Digite seu email...'
+            <Input
+            onChangeText={setEmail}
             value={email}
-            style={styles.input}
-            ></TextInput>
+            placeholder='Digite seu email...'
+            keyboardType='email-address'
+            />
         </View>
         <View style={styles.inputContainer}>
             <Ionicons name="lock-closed-outline" size={20} color="#A7A7A7" style={styles.icon} />
-            <TextInput
-            onChange={setPassword}
+            <Input
+            onChangeText={setPassword}
             value={password}
-            secureTextEntry={true}
-            keyboardType='password'
             placeholder='Digite sua senha...'
-            style={styles.input}
-            ></TextInput>
+            secureTextEntry={false}
+            />
         </View>
-        <Text style={styles.registerText}>Não tem uma conta? 
-            <Text style={styles.registerLink}> crie uma</Text>
-        </Text>
+        <TouchableOpacity
+         onPress={() => navigation.navigate('Register')}
+        >
+            <Text style={styles.registerText}>Não tem uma conta? 
+                <Text style={styles.registerLink}> crie uma</Text>
+            </Text>
+        </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={authLogin}>
             <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
@@ -64,26 +65,25 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fff',
-        paddingHorizontal: 20,
+        backgroundColor: '#fff',            
     },
     logo:{
-        width: 120,
-        height: 40,
+        width: 125,
+        height: 26,
         resizeMode: "contain",
-        marginBottom: 20,
+        marginBottom: 24,
     },
     imageLogin:{
-        width: 250,
-        height: 250,
+        width: 356,
+        height: 328,
         resizeMode: "contain",
-        marginBottom: 20,
+        marginBottom: 24,
     },
     title:{
         fontSize: 22,
         fontWeight: "bold",
         color: "#1F284E",
-        marginBottom: 10,
+        marginBottom: 24,
     },
     inputContainer: {
         flexDirection: "row",
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         borderWidth: 1,
         borderColor: "#ddd",
+        marginBottom: 15,
       },
       icon: {
         marginRight: 10,
@@ -106,6 +107,7 @@ const styles = StyleSheet.create({
       registerText: {
         color: "#929292",
         marginTop: 10,
+        marginBottom: 15,
       },
       registerLink:{
         color: "#1F284E",
