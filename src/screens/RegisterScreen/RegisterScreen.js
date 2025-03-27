@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {View, Text, StyleSheet, Image, KeyboardAvoidingView,Platform, ScrollView} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import Input from '../../components/TextInput/';
 import Button from '../../components/Button/';
-import { TextInputMask } from 'react-native-masked-text';
+import {mask} from 'react-native-mask-text';
 
 export default function RegisterScreen({navigation}){
+
+    const [cpf,setCpf] = useState('');
+    const [cel,setCel] = useState('');
+
+    const handleCpfChange = (text) => {
+        const masked = mask(text, '999.999.999-99');
+        setCpf(masked);
+    }
+    const handleCelChange = (text) => {
+        const masked = mask(text, '(99) 99999-9999');
+        setCel(masked);
+    }
+
     return(
             <View style={styles.container}>
                 <ScrollView contentContainerStyle={styles.scrollContainer} >
@@ -40,10 +53,21 @@ export default function RegisterScreen({navigation}){
                         />
                     </View>
                     <View style={styles.inputContainer}>
+                        <Ionicons name="call-outline" size={20} color="#A7A7A7" style={styles.icon} />
+                        <Input
+                        placeholder='Digite seu número de celular...'   
+                        keyboardType='number-pad'
+                        onChangeText={handleCelChange}
+                        value={cel}
+                        />
+                    </View>
+                    <View style={styles.inputContainer}>
                         <Ionicons name="document-text-outline" size={20} color="#A7A7A7" style={styles.icon} />
                         <Input
                         placeholder='Digite seu CPF...'
                         keyboardType='number-pad'
+                        onChangeText={handleCpfChange}
+                        value={cpf}
                         
                         />
                     </View>
