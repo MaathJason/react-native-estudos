@@ -9,6 +9,7 @@ export default function LoginScreen({navigation}){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+
     const authLogin = () => {
         if (email === 'teste@logus.com' && password === 'Teste'){
             alert('Login efetuado com sucesso');

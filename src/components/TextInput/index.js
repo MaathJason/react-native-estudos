@@ -11,6 +11,8 @@ export default function Input(props){
         keyboardType={props.keyboardType}
         onChangeText={props.onChangeText}
         value={props.value}
+        secureTextEntry={props.secureTextEntry}
+        maxLength={props.maxLength}
         />
     )
 }
@@ -19,7 +21,7 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         height: 45,
-        color: '#A7A7A7',
+        color: 'black',
       },
 })
 
