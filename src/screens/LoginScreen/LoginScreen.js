@@ -13,6 +13,7 @@ export default function LoginScreen({navigation}){
     const authLogin = () => {
         if (email === 'teste@logus.com' && password === 'Teste'){
             alert('Login efetuado com sucesso');
+            navigation.navigate('MainHome');
         } else {
             alert('Email ou senha invalidos');
         }
