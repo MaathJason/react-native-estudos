@@ -54,7 +54,7 @@ export default function RegisterScreen({navigation}){
                 nome,
                 email,
                 cpf:unmaskedCpf,
-                pw: password,
+                senha: password,
                 telefone:unmaskedCel,
             };
             await registerUser(userData);

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, TextInput, TouchableOpacity,Image} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import Input from '../../components/TextInput/';
+import {loginUser} from '../../services/authService.js';
 
 export default function LoginScreen({navigation}){
 
@@ -10,14 +11,40 @@ export default function LoginScreen({navigation}){
     const [password, setPassword] = useState('');
 
 
-    const authLogin = () => {
-        if (email === 'teste@logus.com' && password === 'Teste'){
-            alert('Login efetuado com sucesso');
-            navigation.navigate('MainHome');
-        } else {
-            alert('Email ou senha invalidos');
+   const handleLogin = async () => {
+        if (!email || !password) {
+            alert('PREENCHA TODOS OS CAMPOS');
+            return;
         }
+
+        if (!email.includes('@') || !email.includes('.')) {
+            alert('E-mail inválido!');
+            return;
+        }
+    
+        if (password.length < 6) {
+            alert('A senha deve ter pelo menos 6 caracteres');
+            return;
+        }
+
+        try {
+            const credenciais = {email,senha:password}
+            const response = await loginUser(credenciais);
+            alert('Login efetuado com sucesso!');
+            navigation.navigate('MainHome');
+        } catch (error) {
+            alert('Erro ao fazer login. Verifique suas credenciais e tente novamente.');}
+
     }
+
+    // const authLogin = () => {
+    //     if (email === 'teste@logus.com' && password === 'Teste'){
+    //         alert('Login efetuado com sucesso');
+    //         navigation.navigate('MainHome');
+    //     } else {
+    //         alert('Email ou senha invalidos');
+    //     }
+    // }
 
     return(
     <View style={styles.container}>
@@ -55,7 +82,7 @@ export default function LoginScreen({navigation}){
                 <Text style={styles.registerLink}> crie uma</Text>
             </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={authLogin}>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
             <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
     </View>
