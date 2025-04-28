@@ -5,10 +5,15 @@ import { Ionicons } from '@expo/vector-icons';
 import MainHome from '../../screens/MainHome/MainHome';
 import Activity from '../../screens/ActivityScreen/ActivityScreen';
 import Profile from '../../screens/ProfileScreen/ProfileScreen';
+import { useRoute } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
-export default function MainTabs() {
+export default function MainTabs({route}) {
+
+  const { cliente } = route.params; 
+
+
   return (
     <Tab.Navigator screenOptions={{headerShown: false, tabBarItemStyle:{
       padding:12,
@@ -27,7 +32,9 @@ export default function MainTabs() {
         tabBarIcon: ({ color, size }) => (
           <Ionicons name="home-outline" color={color} size={28} />
         ),
-      }}/>
+      }}
+      initialParams={{ cliente }}
+      />
       <Tab.Screen name="Atividade" component={Activity}
        options={{
         tabBarActiveTintColor: '#EF8108',
@@ -36,6 +43,7 @@ export default function MainTabs() {
           <Ionicons name="navigate-outline" color={color} size={28} />
         ),
        }}
+       initialParams={{ cliente }}
       />
       <Tab.Screen name="Perfil" component={Profile}
        options={{
@@ -45,7 +53,9 @@ export default function MainTabs() {
           <Ionicons name="person-circle" color={color} size={28}/>
         ),
        }}
+       initialParams={{ cliente }} // Passando o cliente como parâmetro inicial
       />
+      
     </Tab.Navigator>
   );
 }

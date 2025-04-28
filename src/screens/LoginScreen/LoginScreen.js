@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput, TouchableOpacity,Image} from 'react-native';
+import {View, Text, StyleSheet,TouchableOpacity,Image} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import Input from '../../components/TextInput/';
 import {loginUser} from '../../services/authService.js';
@@ -31,10 +31,10 @@ export default function LoginScreen({navigation}){
             const credenciais = {email,senha:password}
             const response = await loginUser(credenciais);
             alert('Login efetuado com sucesso!');
-            navigation.navigate('MainHome');
+
+            navigation.navigate('MainHome', {cliente:response.cliente});
         } catch (error) {
             alert('Erro ao fazer login. Verifique suas credenciais e tente novamente.');}
-
     }
 
     // const authLogin = () => {
@@ -72,7 +72,7 @@ export default function LoginScreen({navigation}){
             onChangeText={setPassword}
             value={password}
             placeholder='Digite sua senha...'
-            secureTextEntry={false}
+            secureTextEntry={true}
             />
         </View>
         <TouchableOpacity

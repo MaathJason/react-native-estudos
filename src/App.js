@@ -10,6 +10,7 @@ import MainHome from './navigators/MainTabs/MainTabs';
 const Stack = createStackNavigator();
 
 export default function App() {
+  
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">

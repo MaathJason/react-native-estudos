@@ -1,7 +1,11 @@
 import { Image, ScrollView, StatusBar, StyleSheet, Text,View } from "react-native";
 import {Ionicons} from '@expo/vector-icons';
 
-export default function ProfileScreen(){
+
+export default function ProfileScreen({route}){
+
+    const {cliente} = route.params; // Recebendo o cliente como parâmetro da rota
+
     return(
         <ScrollView style={{backgroundColor:'#FFFFFF'}}>
             <StatusBar barStyle="dark-content" backgroundColor="#D9D9D9" />
@@ -15,7 +19,7 @@ export default function ProfileScreen(){
                  />
             </View>
             <View style={{alignItems: 'center',flex:1,justifyContent:'center'}}>
-                <Text style={{fontSize:24,color:'#1F284E',fontWeight:600}}>Nickolas Maximiano <Ionicons
+                <Text style={{fontSize:24,color:'#1F284E',fontWeight:600}}>{cliente.nome}<Ionicons
                 name="create-outline" size={21}
                 /></Text>
                 <View>

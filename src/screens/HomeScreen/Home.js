@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput, TouchableOpacity,Image} from 'react-native';
-import {Ionicons} from '@expo/vector-icons';
+import React from 'react';
+import {View, Text, StyleSheet,TouchableOpacity} from 'react-native';
 
 export default function Home({navigation}){
+
+    
     return(
         <View style={styles.container}>
             <Text>Bem vindo!</Text>
